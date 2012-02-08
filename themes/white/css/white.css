@@ -1,0 +1,113 @@
+/** PLANTILLA WHITE adjunta al CMS Migdc 
+ * Año: 2012
+ * Creada por: Héctor Costa Guzmán
+ */
+ 
+*{
+    font-family: Verdana, sans-serif;
+    color: black;
+}
+
+body{
+    margin: 0;
+    padding:0;
+    text-align: center;
+    color: black;
+}
+
+#wrapper { 
+    margin: 0 auto;
+    padding: 0;
+    width: 980px;
+    text-align: left;
+    background-image: url('../images/bg.png');
+    background-repeat: repeat-y;
+}
+
+#header{
+    float: left;
+    height: 130px;
+    width: 100%;
+    text-align: center;
+    border-bottom: black solid 2px;
+}
+
+#menu{
+    float: left;
+    padding: 0px 10px;
+    width: 138px;
+    padding-bottom: 10px;
+    background-color: white;    
+    font-size: 95%;
+}
+
+#content{
+    float: left;
+    width: 790px;
+    padding-left: 18px;
+    color: black;
+    padding-right: 12px;
+    font-size: 95%;
+}
+
+#footer{
+    float: left;
+    width: 100%;
+    height: 60px;
+    padding-top: 10px;
+    font-size: 90%;
+    text-align: center;
+    background-color: white;
+    color: white;
+    border-top: black solid 2px;
+    z-index: 1;
+}
+
+a:link, a:visited{
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+button, input[type="submit"], input[type="reset"]{ 
+    background-color: lightgrey; 
+    border-color: black; 
+    color: black;  
+    padding: 3px;
+    margin-bottom: 5px;
+    text-align: center; 
+    cursor: pointer;
+    font-size: 12px;
+}
+
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover{
+    background-color: white; 
+}
+
+textarea, input[type="text"], input[type="password"]{
+    width: 95%;
+    font-size: 1em;
+    padding: 4px;
+}
+
+select{
+    font-size: 1em;
+    padding: 4px;
+}
+
+input[readonly]{
+    background-color: #eee;
+}
+
+#header h1{
+    margin-left: 157px;    
+    font-family: Tahoma,Kalimati,sans-serif !important;
+}
+#header h3{
+    margin-left: 157px;    
+    font-family: Tahoma,Kalimati,sans-serif !important;
+}

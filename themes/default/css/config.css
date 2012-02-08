@@ -1,0 +1,57 @@
+@import url(http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic);
+
+*{
+    font-family: 'Asap', sans-serif;
+}
+
+#content{
+    position: absolute;
+    width: 340px;
+    padding: 20px;
+    left: 50%;
+    margin-left: -185px; 
+    margin-top: 40px;
+    border: solid black 2px;
+}
+
+img
+{  border-style: none;
+}
+
+a:link, a:visited{
+  color: #024b70;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+button, input[type="submit"], input[type="reset"]{ 
+    background-color: #189f09; 
+    border-color: black; 
+    color: black;  
+    font-size: 11pt; 
+    padding: 2px;
+    margin-bottom: 5px;
+    text-align: center; 
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover{
+    background-color: #8ed809; 
+}
+
+textarea, input[type="text"], input[type="password"]{
+    width: 95%;
+    font-size: 1em;
+    padding: 4px;
+}
+
+    
+.loginDiv{
+    width: 180px; 
+    border: 2px solid black; 
+    text-align: center; 
+    padding: 10px;
+}

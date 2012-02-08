@@ -1,0 +1,119 @@
+/** PLANTILLA SKY adjunta al CMS Migdc 
+ * Año: 2012
+ * Creada por: Héctor Costa Guzmán
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic);
+
+*{
+    font-family: 'Asap', sans-serif;
+}
+body{
+    margin: 0;
+    padding:0;
+    text-align: center;
+    background-color: black;
+}
+
+#wrapper { 
+    margin: 0 auto;
+    padding: 0;
+    width: 980px;
+    text-align: left;
+    background-image: url('../images/bg.png');
+    background-repeat: repeat-y;
+}
+
+#header{
+    float: left;
+    height: 160px;
+    width: 100%;
+    text-align: center;
+    background-image: url('../images/header.jpg');
+}
+
+#header h1{
+    color: white;
+    margin-left: 157px;
+}
+#header h3{
+    color: white;
+    margin-left: 157px;
+}
+
+#menu{
+    float: left;
+    padding: 0px 10px;
+    width: 138px;
+    padding-bottom: 10px;
+    color: white;
+    background-color: black;
+}
+
+#content{
+    float: left;
+    width: 790px;
+    padding-left: 18px;
+    border-left: white solid 2px;
+    color: black;
+    background-color: white;
+    padding-right: 12px;
+    border-top: white solid 2px;
+    border-bottom: white solid 2px;
+}
+
+#footer{
+    float: left;
+    width: 823px;
+    height: 76px;
+    padding-top: 10px;
+    font-size: 90%;
+    text-align: center;
+    background-image: url('../images/footer.jpg');
+    color: white;
+    padding-left: 157px;
+}
+
+a:link, a:visited{
+  font-weight: bold;
+  color: #0173b9;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+button, input[type="submit"], input[type="reset"]{ 
+    background-color: #3a8fee; 
+    border-color: black; 
+    color: black;  
+    font-size: 11pt; 
+    padding: 3px;
+    margin-bottom: 5px;
+    text-align: center; 
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover{
+    background-color: #69b0ff; 
+}
+
+textarea, input[type="text"], input[type="password"]{
+    width: 95%;
+    font-size: 1em;
+    padding: 4px;
+}
+
+select{
+    font-size: 1em;
+    padding: 4px;
+}
+
+input[readonly]{
+    background-color: #eee;
+}
+
+a.footerLink{
+    color: black;
+}

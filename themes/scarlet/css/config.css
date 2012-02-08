@@ -1,0 +1,68 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic|Overlock:400,700);
+
+*{
+    font-family: 'Ubuntu mono', sans-serif;
+}
+
+body{
+    background-color: black;
+}
+h2{
+    color:white;
+}
+
+#content{
+    position: absolute;
+    width: 340px;
+    padding: 20px;
+    left: 50%;
+    margin-left: -185px; 
+    margin-top: 40px;
+}
+
+a:link, a:visited{
+  font-weight: bold;
+  color: #ff7761;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+button, input[type="submit"], input[type="reset"]{ 
+    background-color: #FF2400; 
+    border-color: black; 
+    color: black;  
+    font-size: 11pt; 
+    padding: 3px;
+    margin-bottom: 5px;
+    text-align: center; 
+    cursor: pointer;
+}
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover{
+    background-color: #ff7761; 
+}
+
+textarea, input[type="text"], input[type="password"]{
+    width: 95%;
+    font-size: 1em;
+    padding: 4px;
+}
+
+select{
+    font-size: 1em;
+    padding: 4px;
+}
+
+input[readonly]{
+    background-color: #eee;
+}
+
+.loginDiv{
+    width: 180px; 
+    border: 2px solid white; 
+    text-align: center; 
+    padding: 10px;    
+    color:white;
+}

@@ -1,0 +1,97 @@
+/** PLANTILLA DEFAULT adjunta al CMS Migdc 
+ * Año: 2012
+ * Creada por: Héctor Costa Guzmán
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic);
+
+*{
+    font-family: 'Asap', sans-serif;
+}
+body{
+    margin: 0;
+    padding:0;
+    text-align: center;
+}
+
+#wrapper { 
+    margin: 0 auto;
+    padding: 0;
+    width: 980px;
+    text-align: left;
+    background-image: url('../images/bg.png');
+    background-repeat: repeat-y;
+}
+
+#header{
+    float: left;
+    height: 180px;
+    width: 100%;
+    text-align: center;
+    background-image: url('../images/header.jpg');
+    border-bottom: black solid 2px;
+}
+
+#menu{
+    float: left;
+    padding: 0px 10px;
+    width: 138px;
+    padding-bottom: 10px;
+}
+
+#content{
+    float: left;
+    width: 790px;
+    padding-left: 18px;
+}
+
+#footer{
+    float: left;
+    width: 100%;
+    height: 90px;
+    padding-top: 10px;
+    border-top: black solid 2px;
+    font-size: 90%;
+    text-align: center;
+    background-image: url('../images/footer.jpg');
+}
+
+a:link, a:visited{
+  font-weight: bold;
+  color: #0055ff;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+button, input[type="submit"], input[type="reset"]{ 
+    background-color: #189f09; 
+    border-color: black; 
+    color: black;  
+    font-size: 11pt; 
+    padding: 2px;
+    margin-bottom: 5px;
+    text-align: center; 
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover{
+    background-color: #8ed809; 
+}
+
+textarea, input[type="text"], input[type="password"]{
+    width: 95%;
+    font-size: 1em;
+    padding: 4px;
+}
+
+select{
+    font-size: 1em;
+    padding: 4px;
+}
+
+input[readonly]{
+    background-color: #eee;
+}
