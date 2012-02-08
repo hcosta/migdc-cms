@@ -16,7 +16,7 @@ class ContactRequest {
         $to = $GLOBALS['site_email'];
         $asunto = "Nuevo correo de " . $GLOBALS['site_name'] . "";
         $message ="\n\nDe: " . $email;
-        $message ="\nNombre: " . $name;
+        $message .="\nNombre: " . $name;
         $message .="\nAsunto: " . $reason;
         $message .="\nMissatge: " . $msg;
         if (@mail($to, $asunto, $message)) {
