@@ -56,6 +56,6 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                <h1><?= $site_name ?></h1>
+                <h1><a href="index.php"><?= $site_name ?></a></h1>
                 <h3><?= $site_desc ?></h3>
             </div>

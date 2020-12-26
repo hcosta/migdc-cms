@@ -16,13 +16,13 @@ if (file_exists('../db/config.sqlite'))
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Configura tu sitio web - MyCMS</title>
+        <title>Configura tu sitio web - Migdc</title>
         <link href="themes/default/css/config.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
         <div id="content">
-            <div align="center"><br><h3 style="padding: 0;margin: 0;">Configurar MyCMS</h3></div><br>
+            <div align="center"><br><h3 style="padding: 0;margin: 0;">Configurar Migdc</h3></div><br>
             <?php
             
                 @$titulo = cleanStr($_POST['configname']);

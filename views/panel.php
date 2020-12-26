@@ -11,7 +11,7 @@
  */
 
 ?>
-<div><br><h3 style="padding: 0;margin: 0;">Configurar MyCMS</h3><br>
+<div><br><h3 style="padding: 0;margin: 0;">Configurar Migdc</h3><br>
     <?php
     @$name = cleanStr($_POST['configName']);
     @$descr = cleanStr($_POST['configDesc']);

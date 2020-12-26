@@ -15,9 +15,8 @@
                 <h3>Secciones</h3>
                     <?php
                     $db = new SQLite('db/config.sqlite');
-                    $result = $db->Result("select * from Sections");
-
-                    foreach ($result as $page) {
+                    $results = $db->Result("select * from Sections");
+                    while ($page = $results->fetchArray()){
                         echo '<button style="width: 85%;" onclick="window.location.href=\'index.php?' . $page['Seo'] . '\'">' . $page['Title'] . '</button><br>';
                     }
 

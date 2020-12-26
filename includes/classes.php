@@ -29,7 +29,7 @@ class ContactRequest {
 
 class Login {
 
-    function Login() {
+    function __construct() {
         
     }
 
@@ -63,7 +63,7 @@ class Section {
 
     var $db;
 
-    function Section() {
+    function __construct() {
         $this->db = new SQLite('db/config.sqlite');
     }
 
@@ -104,19 +104,21 @@ class Section {
     function existsSection($seo) {
 
         $query = 'SELECT rowid from Sections WHERE seo="' . $seo . '"';
-        $result = $this->db->Result($query);
-        if (count($result) > 0)
-            return $result[0]['rowid'];
+        $rows = $this->db->Result($query);
+        $row = $rows->fetchArray();
+        if ($row)
+            return $row['rowid'];
         else
             return false;
     }
 
     function existsSectionId($id) {
 
-        $query = 'SELECT seo from Sections WHERE rowid="' . $id . '"';
-        $result = $this->db->Result($query);
-        if (count($result) > 0)
-            return $result[0]['seo'];
+        $query = 'SELECT Seo from Sections WHERE rowid="' . $id . '"';
+        $rows = $this->db->Result($query);
+        $row = $rows->fetchArray();
+        if ($row)
+            return $row['Seo'];
         else
             return false;
     }

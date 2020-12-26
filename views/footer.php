@@ -14,7 +14,7 @@
 
             <div id="footer">
                 <div align="center" style="margin-top:5px;">
-                    <span style="text-transform:capitalize; font-weight: bold;"><?=$GLOBALS['site_theme']?> Theme</span> powered by <a class="footerLink" href="http://migdc.hcosta.info">Migdc</a> - Página cargada en: <?=$elapsed_time?> segundos
+                    © 2012 - <span style="text-transform:capitalize; font-weight: bold;"><?=$GLOBALS['site_theme']?> Theme</span> powered by <a class="footerLink" href="https://github.com/hcosta/migdc-cms">Migdc</a> - Página cargada en <?=$elapsed_time?> segundos
                 </div>
             </div>
             <div style="clear:both"></div>

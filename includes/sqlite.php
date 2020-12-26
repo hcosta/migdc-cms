@@ -22,7 +22,7 @@ class SQLite {
         $this->file = $file;
 
         try {
-            $this->database = new SQLiteDatabase($this->file, 0666, $error);
+            $this->database = new SQLite3($this->file);
         } catch (Exception $e) {
             die($error);
         }
@@ -31,13 +31,12 @@ class SQLite {
     function AutoSetup($configname, $configdesc, $configadmin, $configpass, $configemail) {
 
         try {
-            $this->query = 'CREATE TABLE "Config" (Key TEXT, Value TEXT, PRIMARY KEY (Key))';
 
-            if (@$this->database->queryExec($this->query, $error)) {
+            if ($this->database->exec('CREATE TABLE "Config" (Key TEXT, Value TEXT, PRIMARY KEY (Key))')) {
 
                 $configpass = md5($configpass . "MyCMS");
 
-                $this->query =
+                if ($this->database->exec(
                         'INSERT INTO Config (Key, Value) ' .
                         'VALUES ("site_name", "' . $configname . '"); ' .
                         'INSERT INTO Config (Key, Value) ' .
@@ -51,20 +50,14 @@ class SQLite {
                         'INSERT INTO Config (Key, Value) ' .
                         'VALUES ("site_contact", "enabled"); ' .
                         'INSERT INTO Config (Key, Value) ' .
-                        'VALUES ("site_email", "' . $configemail . '")';
-
-                if ($this->database->queryExec($this->query, $error)) {
+                        'VALUES ("site_email", "' . $configemail . '")')) {
                     try {
-                        $this->query = 'CREATE TABLE "Sections" (Title TEXT, Seo TEXT, Content TEXT, Tags TEXT, UNIQUE (Seo))';
 
-                        if (@$this->database->queryExec($this->query, $error)) {
+                        if (@$this->database->exec('CREATE TABLE "Sections" (Title TEXT, Seo TEXT, Content TEXT, Tags TEXT, UNIQUE (Seo))')) {
 
                             //Sample section
-                            $this->query =
-                                    'INSERT INTO Sections (Title, Seo, Content, Tags) ' .
-                                    'VALUES ("Portada", "portada", "<p>Bienvenido a la página de ejemplo de Migdc, la forma más rápida de crear contenido en Internet!</p><br><br><br><br><br><br><br><br><br>", "portada")';
-
-                            if (!$this->database->queryExec($this->query, $error)) {
+                            if (!$this->database->exec('INSERT INTO Sections (Title, Seo, Content, Tags) ' .
+                                    'VALUES ("Portada", "portada", "<p>Bienvenido a la página de ejemplo de Migdc, la forma más rápida de crear contenido en Internet!</p><br><br><br><br><br><br><br><br><br>", "portada")')) {
                                 return true;
                             }
                         }
@@ -82,8 +75,7 @@ class SQLite {
 
     function ReadConfig() {
         //read data from database
-        $this->query = "SELECT * FROM Config";
-        if ($this->result = $this->database->query($this->query, SQLITE_BOTH, $error)) {
+        if ($this->result = $this->database->query("SELECT * FROM Config", SQLITE_BOTH, $error)) {
             while ($row = $this->result->fetch()) {
                 print("Key: {$row['Key']} <br />" .
                         "Value: {$row['Value']} <br />");
@@ -100,14 +92,13 @@ class SQLite {
             else
                 $contact = "disabled";
             if (md5($actualpass . "MyCMS") == $GLOBALS['site_pass']) {
-                $this->query = 'UPDATE Config SET Value="' . $configname . '" WHERE Key=\'site_name\';
+
+                $this->database->exec('UPDATE Config SET Value="' . $configname . '" WHERE Key=\'site_name\';
                             UPDATE Config SET Value=\'' . $configdesc . '\' WHERE Key=\'site_desc\';
                             UPDATE Config SET Value=\'' . md5($newpass . "MyCMS") . '\' WHERE Key=\'site_pass\';
                             UPDATE Config SET Value=\'' . $theme . '\' WHERE Key=\'site_theme\';
                             UPDATE Config SET Value=\'' . $contact . '\' WHERE Key=\'site_contact\';
-                            UPDATE Config SET Value="' . $configemail . '" WHERE Key=\'site_email\'';
-
-                $this->database->queryExec($this->query);
+                            UPDATE Config SET Value="' . $configemail . '" WHERE Key=\'site_email\'');
 
                 $GLOBALS['site_name'] = $configname;
                 $GLOBALS['site_desc'] = $configdesc;
@@ -124,12 +115,11 @@ class SQLite {
                 $contact = "enabled";
             else
                 $contact = "disabled";
-            $this->query = 'UPDATE Config SET Value="' . $configname . '" WHERE Key=\'site_name\';
+            $this->database->exec('UPDATE Config SET Value="' . $configname . '" WHERE Key=\'site_name\';
                             UPDATE Config SET Value=\'' . $configdesc . '\' WHERE Key=\'site_desc\';
                             UPDATE Config SET Value=\'' . $theme . '\' WHERE Key=\'site_theme\';
                             UPDATE Config SET Value=\'' . $contact . '\' WHERE Key=\'site_contact\';
-                            UPDATE Config SET Value="' . $configemail . '" WHERE Key=\'site_email\'';
-            $this->database->queryExec($this->query);
+                            UPDATE Config SET Value="' . $configemail . '" WHERE Key=\'site_email\'');
             $GLOBALS['site_name'] = $configname;
             $GLOBALS['site_desc'] = $configdesc;
             $GLOBALS['site_email'] = $configemail;
@@ -142,21 +132,11 @@ class SQLite {
     }
 	
     function Result($query) {
-
-        $this->query = $this->database->query($query);
-        $this->result = $this->query->fetchAll(SQLITE_ASSOC);
-        return $this->result;
-        /* foreach ($r as $entry) {
-          echo 'Key: ' . $entry['Key'] . '  Value: ' . $entry['Value'];
-          } */
+        return $this->database->query($query);
     }
 
     function DoQuery($query) {
-        $this->database->queryExec($query, $error);
-        if (!$error)
-            return true;
-        else
-            return $error;
+        return $this->database->exec($query);
     }
 
 }

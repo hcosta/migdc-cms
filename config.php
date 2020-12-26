@@ -13,6 +13,9 @@
 require_once ('includes/sqlite.php');
 require_once ('includes/functions.php');
 
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 if (!file_exists('db/config.sqlite')) {
 
     if (isset($_POST['configname']) && isset($_POST['configdesc']) && isset($_POST['configadmin']) && isset($_POST['configpass']) && isset($_POST['configemail'])) {
@@ -23,10 +26,10 @@ if (!file_exists('db/config.sqlite')) {
 
             if ($db->AutoSetup(cleanStr($_POST['configname']), cleanStr($_POST['configdesc']), cleanStr($_POST['configadmin']), cleanStr($_POST['configpass']), cleanStr($_POST['configemail']))) {
 
-                $result = $db->Result('SELECT * FROM Config');
+                $results = $db->Result('SELECT * FROM Config');
 
                 // Dump db config to CMS
-                foreach ($result as $entry) {
+                while ($entry = $results->fetchArray()){
                     switch ($entry['Key']) {
                         case 'site_name':
                             $GLOBALS['site_name'] = $entry['Value'];
@@ -61,40 +64,35 @@ if (!file_exists('db/config.sqlite')) {
     } else
         include ('views/config.php');
 } else {
-    try {
+    $db = new SQLite('db/config.sqlite');
+    //$db->ReadConfig();
+    $results = $db->Result('SELECT * FROM Config');
 
-        $db = new SQLite('db/config.sqlite');
-        //$db->ReadConfig();
-        $result = $db->Result('SELECT * FROM Config');
-
-        // Dump db config to CMS
-        foreach ($result as $entry) {
-            switch ($entry['Key']) {
-                case 'site_name':
-                    $GLOBALS['site_name'] = $entry['Value'];
-                    break;
-                case 'site_desc':
-                    $GLOBALS['site_desc'] = $entry['Value'];
-                    break;
-                case 'site_admin':
-                    $GLOBALS['site_admin'] = $entry['Value'];
-                    break;
-                case 'site_pass':
-                    $GLOBALS['site_pass'] = $entry['Value'];
-                    break;
-                case 'site_email':
-                    $GLOBALS['site_email'] = $entry['Value'];
-                    break;                        
-                case 'site_contact':
-                    $GLOBALS['site_contact'] = $entry['Value'];
-                    break;
-                case 'site_theme':
-                    $GLOBALS['site_theme'] = $entry['Value'];
-                    break;
-            }
+    // Dump db config to CMS
+    while ($entry = $results->fetchArray()){
+        switch ($entry["Key"]) {
+            case 'site_name':
+                $GLOBALS['site_name'] = $entry["Value"];
+                break;
+            case 'site_desc':
+                $GLOBALS['site_desc'] = $entry["Value"];
+                break;
+            case 'site_admin':
+                $GLOBALS['site_admin'] = $entry["Value"];
+                break;
+            case 'site_pass':
+                $GLOBALS['site_pass'] = $entry["Value"];
+                break;
+            case 'site_email':
+                $GLOBALS['site_email'] = $entry["Value"];
+                break;                        
+            case 'site_contact':
+                $GLOBALS['site_contact'] = $entry["Value"];
+                break;
+            case 'site_theme':
+                $GLOBALS['site_theme'] = $entry["Value"];
+                break;
         }
-    } catch (Exception $e) {
-        //
     }
 }
 ?>

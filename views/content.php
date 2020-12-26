@@ -16,32 +16,35 @@
                 //CHECK ADMIN OPTIONS
                 $db = new SQLite('db/config.sqlite');
                 $found = false;
+                $keys = [];
 
                 foreach ($_GET as $key => $elem) {
-                    $keys[] = $key;
+                    array_push($keys, $key);
                 }
 
                 if (!isset($_GET['admin']) && !isset($_GET['edit']) && !isset($_GET['delete'])) {
 
                     $others = array("config", "contacto");
+                    $rows = $db->Result("select rowid, * from Sections");
+                    $firstrow = null;
+                    $nrows = 0;
 
-                    $result = $db->Result("select rowid, * from Sections");
-                    foreach ($result as $page) {
-                        $seo = $page['Seo'];
+                    while ($row = $rows->fetchArray()){
+                        $seo = $row['Seo'];
                         if (isset($_GET["$seo"])) {
 
 echo "                              
 <!-- START POST CONTENT -->
                             
 ";
-                            echo "<h3>" . $page['Title'] . "</h3>";
+                            echo "<h3>" . $row['Title'] . "</h3>";
 
                             //ADMIN OPTIONS
                             if (!empty($_SESSION['logged'])) {
-                                echo '<button style="width: 80px;" onclick="window.location.href=\'index.php?admin&edit=' . $page['rowid'] . '\'">Editar</button>';
-                                echo '<button style="width: 80px;margin-left:5px;" onclick="window.location.href=\'index.php?admin&delete=' . $page['rowid'] . '\'">Borrar</button>';
+                                echo '<button style="width: 80px;" onclick="window.location.href=\'index.php?admin&edit=' . $row['rowid'] . '\'">Editar</button>';
+                                echo '<button style="width: 80px;margin-left:5px;" onclick="window.location.href=\'index.php?admin&delete=' . $row['rowid'] . '\'">Borrar</button>';
                             }
-                            echo $page['Content'];
+                            echo $row['Content'];
                             
 echo "
                             
@@ -52,17 +55,22 @@ echo "
                             $found = true;
                             break;
                         }
+                        if ($nrows == 0) {
+                            $firstrow = $row;
+                        }
+                        $nrows++;
                     }
-                    if (!$found && (count($result) < 1)) {
+
+                    if (!$found && ($nrows == 0)) {
                         echo "<h3>No hay páginas para mostrar.</h3><br><br><br><br><br><br>";
-                    } else if (!$found && in_array($keys[0], $others)) {
+                    } else if (!$found && ($keys[0] == "config" || $keys[0] == "contacto")) {
                         if ($keys[0] == "config")
                             include 'panel.php';
                         else if ($keys[0] == "contacto")
                             include 'contact.php';
-                    } else if (!$found && (count($result) > 0)) {
-                        header('Location: index.php?' . $result[0]['Seo'] . '');
-                    }
+                    } else if (!$found && ($nrows > 0)) {
+                        header('Location: index.php?' . $firstrow['Seo'] . '');
+                    } 
                 } else {
                     include_once 'views/admin.php';
                 }

@@ -78,14 +78,15 @@ if (!empty($_SESSION['logged']) && isset($_GET['admin'])) {
 
             ///////// END EDIT  ==> CHECK FORM SENT /////////
 
-            $result = $db->Result("select rowid, * from Sections where rowid = '" . $id . "'");
+            $results = $db->Result("select rowid, * from Sections where rowid = '" . $id . "'");
+            $result = $results->fetchArray();
 
             echo '  <form action="" method="POST">
-                        Título*<br><input type="text" name="SectionTitle" value="' . $result[0]['Title'] . '"></input><br><br>
-                        Seo-url*<br><input type="text" name="SectionSeo" value="' . friendlyURL($result[0]['Seo']) . '"></input><br><br>
-                        Palabras clave para buscadores (separadas por comas)<br><input type="text" name="SectionTags" value="' . $result[0]['Tags'] . '"></input><br><br>
-                        Contenido*<br><textarea id="SectionContent" name="SectionContent">' . $result[0]['Content'] . '</textarea><br>
-                        <input type="hidden" name="SectionRowid" value="' . $result[0]['rowid'] . '"></input>
+                        Título*<br><input type="text" name="SectionTitle" value="' . $result['Title'] . '"></input><br><br>
+                        Seo-url*<br><input type="text" name="SectionSeo" value="' . friendlyURL($result['Seo']) . '"></input><br><br>
+                        Palabras clave para buscadores (separadas por comas)<br><input type="text" name="SectionTags" value="' . $result['Tags'] . '"></input><br><br>
+                        Contenido*<br><textarea id="SectionContent" name="SectionContent">' . $result['Content'] . '</textarea><br>
+                        <input type="hidden" name="SectionRowid" value="' . $result['rowid'] . '"></input>
                         
                         <input type="submit" value="Actualizar"/><br><br>*Campos obligatorios 
                     </form><br>';
